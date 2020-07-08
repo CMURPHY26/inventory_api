@@ -3,13 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT;
 const mongoose = require('mongoose');
-
-
 const productsController = require('./controllers/products.js');
-
-//MiddleWare
-app.use("/products", productsController);
-app.use(express.json());//use .json(), not .urlencoded()
 
 // Error / Disconnection
 mongoose.connection.on('error', err => console.log(err.message + ' is Mongod not running?'))
@@ -21,6 +15,11 @@ mongoose.connect('mongodb://localhost:27017/products', { useNewUrlParser: true ,
 mongoose.connection.once('open', ()=>{
     console.log('connected to mongoose...')
 })
+
+//MiddleWare
+app.use(express.json());//use .json(), not .urlencoded()
+app.use("/products", productsController);
+
 
 
 

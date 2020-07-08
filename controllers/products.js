@@ -3,7 +3,8 @@ const products = express.Router();
 const Product = require('../models/product.js');
 
 
-products.post("/products", (req, res) => {
+products.post("/", (req, res) => {
+    console.log(req.body);
     Product.create( req.body, (error, createdProduct) => {
         if (error) {
             res.status(400).json({error: error.message})
