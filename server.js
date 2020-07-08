@@ -21,6 +21,7 @@ mongoose.connection.once('open', ()=>{
 
 
 //MiddleWare
+app.use(express.json());//use .json(), not .urlencoded()
 app.use("/products", productsController);
 
 
