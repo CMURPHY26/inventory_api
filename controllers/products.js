@@ -14,7 +14,12 @@ products.post("/", (req, res) => {
 })
 
 products.get("/", (req, res) => {
-    console.log("inventory index");
+    Product.find({}, (err, foundProducts) => {
+        if(err) {
+            res.status(400).json({error: err.message})
+        }
+        res.status(200).json(foundProducts);
+    })
 })
 
 module.exports = products;
