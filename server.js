@@ -30,13 +30,14 @@ app.get("/products/seed", (req, res) => {
         Product.create([
             {
                 name: faker.commerce.productName(),
-                description: faker.commerce.product(),
+                description: faker.commerce.productMaterial(),
                 item_type: faker.commerce.department(),
                 qty: faker.random.number(),
                 price: faker.commerce.price()
             }
         ])
     }
+    res.redirect("/products");
 })
 
 app.listen(PORT, () => {
