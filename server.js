@@ -24,6 +24,9 @@ app.use(express.json());//use .json(), not .urlencoded()
 app.use("/products", productsController);
 
 
+
+
+
 app.get("/products/seed", (req, res) => {
 
     for(let i = 0; i < 10; i++) {
