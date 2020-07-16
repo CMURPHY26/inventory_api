@@ -4,7 +4,7 @@ const app = express();
 const PORT = process.env.PORT;
 const mongoose = require('mongoose');
 const productsController = require('./controllers/products.js');
-const Product = require('../models/product.js');
+const Product = require('./models/product.js');
 const faker = require('faker');
 const { fake } = require('faker');
 
