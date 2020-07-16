@@ -5,6 +5,18 @@ const Product = require('../models/product.js');
 
 
 
+//SHOW ROUTE
+products.get("/:id", (req, res) => {
+    Product.findById(req.params.id, (err, foundProduct) => {
+        if(err) {
+            res.status(400).json({error: err.message})
+        }
+        res.status(200).json(foundProduct);
+    })
+})
+
+
+//UPDATE ROUTE
 products.put("/:id", (req, res) => {
     Product.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedProduct) => {
         if (err) {
@@ -14,6 +26,8 @@ products.put("/:id", (req, res) => {
     })
 })
 
+
+//DELETE ROUTE
 products.delete("/:id", (req, res) => {
     Product.findOneAndRemove(req.params.id, (err, deletedProduct) => {
         if (err) {
@@ -24,7 +38,8 @@ products.delete("/:id", (req, res) => {
     })
 })
 
-products.post("/", (req, res) => {
+//CREATE ROUTE
+products.post("/new", (req, res) => {
     console.log(req.body);
     Product.create( req.body, (error, createdProduct) => {
         if (error) {
@@ -34,6 +49,7 @@ products.post("/", (req, res) => {
     })
 })
 
+//Index Route
 products.get("/", (req, res) => {
     Product.find({}, (err, foundProducts) => {
         if(err) {
