@@ -8,9 +8,9 @@ const Product = require('../models/product.js');
 products.delete("/:id", (req, res) => {
     Product.findOneAndRemove(req.params.id, (err, deletedProduct) => {
         if (err) {
-            res.status(400).json(error: err.message);
+            res.status(400).json({error: err.message});
         }
-        
+
         res.status(200).json(deletedProduct);
     })
 })
