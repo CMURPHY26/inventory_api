@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT;
+const cors = require('cors');
 const mongoose = require('mongoose');
 const productsController = require('./controllers/products.js');
 const Product = require('./models/product.js');
@@ -21,10 +22,21 @@ mongoose.connection.once('open', ()=>{
 
 //MiddleWare
 app.use(express.json());//use .json(), not .urlencoded()
+
+const whitelist = ['http://localhost:3003']
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
+
+app.use(cors())
+
 app.use("/products", productsController);
-
-
-
 
 
 app.get("/products/seed", (req, res) => {
